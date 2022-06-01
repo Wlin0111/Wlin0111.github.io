@@ -1,0 +1,121 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+      <title>Weixin's Normal Website</title>
+      <style>
+        body {
+            background: rgb(205, 57, 235);
+            color: rgb(45, 45, 45);
+            padding: 10px;
+            font-family: arial;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #all-contents {
+            max-width: 800px;
+            margin: auto;
+        }
+    
+        /* navigation menu */
+        nav {
+            background: rgba(241, 1, 169, 0.932);
+            margin: 0 auto;
+            margin-bottom: 20px;
+            display: flex;
+            padding: 10px;
+        }
+        h1 {
+            display: flex;
+            align-items: center;
+            color: white;
+            flex: 1;
+            margin: 0;
+            font-family: italic
+        }
+        #nav-ul {
+            list-style-image: none;
+        }
+        .nav-li {
+            display: inline-block;
+            padding: 0 10px;
+        }
+        a {
+            text-decoration: none;
+            color: #fff;
+        }
+    
+        /* main container area beneath menu */
+        main {
+            background: rgb(245, 238, 219);
+            display: flex;
+            border: 10px solid pink;
+            border-radius: 50px;
+        }
+        .sidebar {
+            margin-right: 25px;
+            padding: 10px;
+        }
+        .sidebar-img {
+            width: 200px;
+            border: 10px solid pink;
+            border-radius: 50px;
+        }
+        .content {
+            flex: 1;
+            padding: 15px;
+        }
+        #interests {
+            border: 4px silver ridge;
+            border-radius: 50px;
+            padding: 8px;
+        }
+        h2, h3 {
+            margin: 0px;
+            font-family: italic;
+            font-size: 30px;
+        }
+    </style>
+    </head>
+    
+    <body>
+      <!-- All content goes here -->
+     <div id="all-content">
+       <nav>
+         <h1>Weixin's Website</h1>
+           <ul id="nav-ul">
+             <li class="nav-li">
+               <a href="index.html"> Home </a>
+             </li>
+
+             <li class="nav-li">
+               <a href="portfolio.html"> Portfolio </a>
+             </li>
+           </ul>
+       </nav>
+
+       <main>
+         <!-- Sidebard Section -->
+         <div class="sidebar">
+           <img class="sidebar-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjHra5tcD50v3LblCa4wzyB217pUBLgMBXQA&usqp=CAU">
+         </div>
+         <!-- Content Section -->
+        <div class="content">
+          <h2>Weixin Lin</h2>
+           <p>Student at Chalmette High</p>
+        </div>
+      
+         <!-- Interest Section -->
+        <div id="interests">
+          <h3>Interests</h3>
+          <ul>
+            <li>Math</li>
+            <li>Anime</li>
+            <li>Games</li>
+          </ul>
+        </div>
+
+       </main>
+     </div>
+    </body>
+</html>
