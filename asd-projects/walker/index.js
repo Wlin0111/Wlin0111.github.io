@@ -10,6 +10,9 @@ function runProgram(){
   // Constant Variables
   var FRAME_RATE = 60;
   var FRAMES_PER_SECOND_INTERVAL = 1000 / FRAME_RATE;
+  var BOARD_WIDTH = $("#board").width();
+  var BOARD_HEIGHT = $("#board").height();
+
   var KEY = {
     "LEFT":37,
     "UP": 38,
@@ -18,6 +21,9 @@ function runProgram(){
   };
   var positionX = 0;
   var positionY = 0;
+  var speedX = 0;
+  var speedY = 0;
+  
   
   // Game Item Objects
 
@@ -25,7 +31,7 @@ function runProgram(){
   // one-time setup
   var interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
   $(document).on('keydown', handleKeyDown);                           // change 'eventType' to the type of event you want to handle
-
+  $(document).on("keyup", handleKeyUp);
   ////////////////////////////////////////////////////////////////////////////////
   ///////////////////////// CORE LOGIC ///////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
@@ -35,7 +41,8 @@ function runProgram(){
   by calling this function and executing the code inside.
   */
   function newFrame() {
-    repostitionBow();
+    repositionBox();
+    checkForBorderCollision();
 
   }
   
@@ -43,31 +50,64 @@ function runProgram(){
   Called in response to events.
   */
   function handleKeyDown(event) {
-    if(event.which === KEY.LEFT){
-      console.log('left arrow pressed');
-      positionX = positionX - 10;
-    }
-    if(event.which === KEY.UP){
-      console.log('up arrow pressed');
-      positionY = positionY - 10;
-    }
-    if(event.which === KEY.RIGHT){
-      console.log('right arrow pressed');
-      positionX = positionX + 10;
 
-    }
-    if(event.which === KEY.DOWN){
-      console.log('down arrow pressed');
-      positionY = positionY + 10;
-    }
+    changeSpeedX(-5, event.which, KEY.LEFT);
+    changeSpeedX(5, event.which, KEY.RIGHT);
+    changeSpeedY(-5, event.which, KEY.UP);
+    changeSpeedY(5, event.which, KEY.DOWN);
 
   }
 
+  function handleKeyUp(event) {
+    changeSpeedX(0, event.which, KEY.LEFT);
+    changeSpeedX(0, event.which, KEY.RIGHT);
+    changeSpeedY(0, event.which, KEY.UP);
+    changeSpeedY(0, event.which, KEY.DOWN);
+
+
+  }
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
 
+  function repositionBox(){
+    positionX += speedX;
+    $('#Walker').css("left", positionX);
+
+    positionY += speedY;
+    $("#Walker").css("top", positionY);
+  }
+
+
+  function changeSpeedX(newSpeed, keycode, arrowKey){
+    if(keycode === arrowKey){
+      speedX = newSpeed;
+    }
+  }
   
+  function changeSpeedY(newSpeed, keycode, arrowKey){
+    if(keycode === arrowKey){
+      speedY = newSpeed;
+    }
+  }
+  
+  function checkForBorderCollision(){
+    if (positionX > BOARD_WIDTH - $("#Walker").width()){
+      positionX = BOARD_WIDTH - $("#Walker").width();
+
+    }
+    else if (positionX < 0){
+      positionX = 0;
+    }
+    if (positionY > BOARD_HEIGHT - $("#Walker").height()){
+      positionY = BOARD_HEIGHT - $("#Walker").height();
+    }
+     else if (positionY < 0){
+       positionY = 0;
+    }
+
+  }
+
   function endGame() {
     // stop the interval timer
     clearInterval(interval);
